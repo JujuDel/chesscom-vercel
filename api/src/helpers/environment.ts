@@ -17,12 +17,12 @@ export class Environment {
   }
 
   /**
-   * Retrieves server environment.
+   * Retrieves email.
    *
-   * @returns {string} Server environment.
+   * @returns {string} email.
    */
-  static getEnvironment(): string {
-    return process.env.NODE_ENV || 'development';
+  static getEmail(): string {
+    return process.env.EMAIL || '#';
   }
 
   /**

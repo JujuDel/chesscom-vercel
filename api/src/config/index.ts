@@ -11,7 +11,7 @@ export const EMPTY_CHESS_BOARD_FEN = '8/8/8/8/8/8/8/8/';
 /**
  * Location of images.
  */
-export const GITHUB_CHESS_IMAGES_DIRECTORY_URL = 'https://raw.githubusercontent.com/jujudel/chesscom-vercel/master/src/assets/images/';
+export const GITHUB_CHESS_IMAGES_DIRECTORY_URL = 'https://raw.githubusercontent.com/jujudel/chesscom-vercel/master/api/src/assets/images/';
 
 /**
  * Message for 405 error when not in development environment.
