@@ -8,48 +8,12 @@ dotenv.config();
  */
 export class Environment {
   /**
-   * Retrieves Spotify client Id.
-   *
-   * @returns {string} Spotify client Id.
-   */
-  static getSpotifyClientId(): string {
-    return process.env.SPOTIFY_CLIENT_ID || '#';
-  }
-
-  /**
-   * Retrieves Spotify client secret.
-   *
-   * @returns {string} Spotify client secret.
-   */
-  static getSpotifyClientSecret(): string {
-    return process.env.SPOTIFY_CLIENT_SECRET || '#';
-  }
-
-  /**
-   * Retrieves Spotify refresh token.
-   *
-   * @returns {string} Spotify refresh token.
-   */
-  static getSpotifyRefreshToken(): string {
-    return process.env.SPOTIFY_REFRESH_TOKEN || '#';
-  }
-
-  /**
    * Retrieves Chess.com username.
    *
    * @returns {string} Chess.com username.
    */
   static getChessUsername(): string {
     return process.env.CHESS_COM_USERNAME || '#';
-  }
-
-  /**
-   * Retrieves server state.
-   *
-   * @returns {string} Server state.
-   */
-  static getState(): string {
-    return process.env.STATE || '#';
   }
 
   /**
