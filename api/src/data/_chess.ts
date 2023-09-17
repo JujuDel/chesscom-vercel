@@ -1,12 +1,12 @@
 // Types
-import { ICurrentDailyGames } from '../types/_chess';
+import { IDailyGames } from '../types/_daily';
 
 /**
  * Mocked response from Chess.com for a player's current daily chess.
  * 
  * @returns {object} Mocked response.
  */
-export const MOCKED_CHESS_PLAYER_CURRENT_DAILY_CHESS_RESPONSE: ICurrentDailyGames = {
+export const MOCKED_CHESS_PLAYER_CURRENT_DAILY_CHESS_RESPONSE: IDailyGames = {
     games: [
       {
         "url": "https://www.chess.com/game/daily/387915105",

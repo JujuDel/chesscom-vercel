@@ -1,4 +1,4 @@
-export interface ICurrentDailyGame {
+export interface IDailyGame {
   white: string;
   black: string;
   url: string;
@@ -16,17 +16,18 @@ export interface ICurrentDailyGame {
   match?: string;
 }
 
-export interface ICurrentDailyGames {
-  games: ICurrentDailyGame[];
+export interface IDailyGames {
+  games: IDailyGame[];
 }
 
-export interface ICurrentDailyGamesResponse {
-  body: ICurrentDailyGames;
+export interface IDailyGamesResponse {
+  body: IDailyGames;
   statusCode: number;
 }
 
-export interface IConvertedGameObject {
+export interface IConvertedDailyGameObject {
   black: string;
+  end_time: string;
   isWhite: boolean;
   noGame: boolean;
   position: Array<Array<string>>;

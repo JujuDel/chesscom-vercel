@@ -10,23 +10,51 @@ import { getImageData } from './_image';
 
 // Types
 import {
-  IConvertedGameObject,
-  ICurrentDailyGame,
-} from '../types/_chess';
+  IConvertedDailyGameObject,
+  IDailyGame,
+} from '../types/_daily';
+import {
+  IConvertedFinishedGameObject,
+  IFinishedGame,
+  WIN_RESULTS,
+  LOSE_RESULTS,
+} from '../types/_finished';
+
+/**
+ * 
+ * @param {number} timestamp number of seconds since the Unix Epoch
+ * @param {number} offset number of offset hours for the timezone, eg +2 for UTC +02:00
+ * @returns {string} Readable timestamp in the form yyyy-mm-dd hh:mm:ss
+ */
+function timestampToReadableDate(timestamp: number, offset: number): string {
+  const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
+  const utc = date.getTime() + date.getTimezoneOffset() * 60000; // Adjust for the local timezone offset
+  const localDate = new Date(utc + (3600000 * offset)); // Apply the provided offset
+
+  const year = localDate.getFullYear();
+  const month = String(localDate.getMonth() + 1).padStart(2, '0');
+  const day = String(localDate.getDate()).padStart(2, '0');
+  const hours = String(localDate.getHours()).padStart(2, '0');
+  const minutes = String(localDate.getMinutes()).padStart(2, '0');
+  const seconds = String(localDate.getSeconds()).padStart(2, '0');
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
 
 /**
  * Converts recieved game objects to simplified objects.
  *
- * @param {ICurrentDailyGame} game Recieved game object.
- * @returns {IConvertedGameObject} Converted game object.
+ * @param {IDailyGame} game Recieved game object.
+ * @returns {IConvertedDailyGameObject} Converted game object.
  */
-export const convertGameObject = (game: ICurrentDailyGame): IConvertedGameObject => {
+export const convertDailyGameObject = (game: IDailyGame): IConvertedDailyGameObject => {
   const isWhite: boolean = game.white.includes(Environment.getChessUsername());
   const white: string = (game.white.split('/').reverse())[0];
   const black: string = (game.black.split('/').reverse())[0];
 
   return {
     black,
+    end_time: null,
     isWhite,
     noGame: false,
     position: convertFenToArray(isWhite, game.fen),
@@ -35,12 +63,43 @@ export const convertGameObject = (game: ICurrentDailyGame): IConvertedGameObject
 };
 
 /**
+ * Converts recieved game objects to simplified objects.
+ *
+ * @param {IFinishedGame} game Recieved game object.
+ * @returns {IConvertedFinishedGameObject} Converted game object.
+ */
+export const convertFinishedGameObject = (game: IFinishedGame): IConvertedFinishedGameObject => {
+  const isWhite: boolean = game.white.username === Environment.getChessUsername();
+
+  if (WIN_RESULTS.includes(game.black.result)) {
+    game.black.result = "WIN";
+    game.white.result = "LOSE";
+  } else if (LOSE_RESULTS.includes(game.black.result)) {
+    game.black.result = "LOSE";
+    game.white.result = "WIN";
+  } else {
+    game.black.result = "DRAW";
+    game.white.result = "DRAW";
+  }
+
+  return {
+    black: game.black,
+    end_time: timestampToReadableDate(game.end_time, +2),
+    isWhite,
+    noGame: false,
+    position: convertFenToArray(isWhite, game.fen),
+    white: game.white,
+  };
+};
+
+/**
  * Creates an empty game object.
  *
- * @returns {IConvertedGameObject} Empty game object.
+ * @returns {IConvertedDailyGameObject | IConvertedFinishedGameObject} Empty game object.
  */
-export const createEmptyGameObject = (): IConvertedGameObject => ({
+export const createEmptyGameObject = (): IConvertedDailyGameObject | IConvertedFinishedGameObject => ({
   black: null,
+  end_time: null,
   isWhite: true,
   noGame: true,
   position: convertFenToArray(true, EMPTY_CHESS_BOARD_FEN),

@@ -8,15 +8,15 @@ import { renderToString } from 'react-dom/server';
 // Local Imports
 import {
   getPieces,
-  convertGameObject,
+  convertDailyGameObject,
   createEmptyGameObject,
-} from '../../helpers/_chess';
-import { convertToImageResponse } from '../../helpers/_image';
-import { CurrentGames } from '../../components/chess/_CurrentGames';
-import api from '../../api';
+} from '../helpers/_chess';
+import { convertToImageResponse } from '../helpers/_image';
+import { CurrentGames } from '../components/chess/_CurrentGames';
+import api from '../api';
 
 // Types
-import { IConvertedGameObject } from '../../types/_chess';
+import { IConvertedDailyGameObject } from '../types/_daily';
 
 /**
  * Returns an image displaying three of my current chess games from Chess.com.
@@ -31,24 +31,22 @@ export default async function (
   const pieceImages: object = await getPieces();
 
   // Using an awesome library called chess-web-api to get our data ;)
-  const {
-    games = [],
-  } = await api.chess.getCurrentGames();
+  const currentDailyGames = (await api.chess.getCurrentGames()).games;
 
   // Limiting the width of the games.
-  games.length = Math.min(
-    games.length,
+  currentDailyGames.length = Math.min(
+    currentDailyGames.length,
     3,
   );
 
   // There's a lot of data we don't need! Converting the FEN to an array
-  const convertedGames: IConvertedGameObject[] = await Promise.all([
-    ...games.map(convertGameObject),
+  const convertedCurrentGames: IConvertedDailyGameObject[] = await Promise.all([
+    ...currentDailyGames.map(convertDailyGameObject),
   ]);
 
   // Adding empty spots if there aren't 3!
-  for (let i = convertedGames.length; i < 3; i++) {
-    convertedGames.push(createEmptyGameObject());
+  for (let i = convertedCurrentGames.length; i < 3; i++) {
+    convertedCurrentGames.push(createEmptyGameObject() as IConvertedDailyGameObject);
   }
 
   // Hey! I'm returning an image!
@@ -57,8 +55,8 @@ export default async function (
   // Generating the component and rendering it
   const text: string = renderToString(
     CurrentGames({
-      games: convertedGames,
-      pieceImages,
+      games: convertedCurrentGames,
+      pieces: pieceImages,
     }),
   );
 

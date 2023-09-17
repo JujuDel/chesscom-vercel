@@ -7,17 +7,17 @@ import { CURRENT_GAMES_CSS } from './config';
 import Text from '../general/_Text';
 
 // Types
-import { IConvertedGameObject } from '../../types/_chess';
+import { IConvertedDailyGameObject } from '../../types/_daily';
 
 interface ICurrentGamesParameters {
-  games: IConvertedGameObject[];
+  games: IConvertedDailyGameObject[];
   pieceImages: Record<string, string>;
 }
 
 /**
  * Returns image of three chess game positions.
  *
- * @param {IConvertedGameObject[]} games Games to be displayed.
+ * @param {IConvertedDailyGameObject[]} games Games to be displayed.
  * @param {Record<string, string>} pieceImages base64 images of pieces.
  * @returns {React.FC} Functional React component.
  */
@@ -33,7 +33,7 @@ export const CurrentGames: React.FC<ICurrentGamesParameters> = ({
         id="title"
         size="title"
         weight="bold">
-        { !games[0].noGame ? 'current games' : 'no active games' }
+        { !games[0].noGame ? 'Active daily games' : 'No active daily games' }
       </Text>
       
       <div className="games-wrapper">

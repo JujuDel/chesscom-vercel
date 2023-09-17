@@ -5,7 +5,7 @@ import {
 } from '@vercel/node';
 
 // Local Imports
-import chessGamesHandler from '../src/handlers/chess/_games';
+import chessGamesHandler from '../src/handlers/_last_games';
 import { ERROR_MESSAGE_500 } from '../src/config';
 
 /**
