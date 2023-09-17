@@ -10,13 +10,13 @@ import {
   getPieces,
   convertGameObject,
   createEmptyGameObject,
-} from '../../helpers/chess';
-import { convertToImageResponse } from '../../helpers/image';
-import { CurrentGames } from '../../components/chess/CurrentGames';
+} from '../../helpers/_chess';
+import { convertToImageResponse } from '../../helpers/_image';
+import { CurrentGames } from '../../components/chess/_CurrentGames';
 import api from '../../api';
 
 // Types
-import { IConvertedGameObject } from '../../types/chess';
+import { IConvertedGameObject } from '../../types/_chess';
 
 /**
  * Returns an image displaying three of my current chess games from Chess.com.

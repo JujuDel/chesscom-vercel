@@ -5,14 +5,14 @@ import {
   EMPTY_CHESS_BOARD_FEN,
   GITHUB_CHESS_IMAGES_DIRECTORY_URL,
 } from '../config';
-import { Environment } from '../helpers/environment';
-import { getImageData } from './image';
+import { Environment } from './_environment';
+import { getImageData } from './_image';
 
 // Types
 import {
   IConvertedGameObject,
   ICurrentDailyGame,
-} from '../types/chess';
+} from '../types/_chess';
 
 /**
  * Converts recieved game objects to simplified objects.

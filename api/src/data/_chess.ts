@@ -1,5 +1,5 @@
 // Types
-import { ICurrentDailyGames } from '../types/chess';
+import { ICurrentDailyGames } from '../types/_chess';
 
 /**
  * Mocked response from Chess.com for a player's current daily chess.

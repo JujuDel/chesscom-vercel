@@ -2,12 +2,12 @@
 import React from 'react';
 
 // Local Imports
-import ConvertSVG from '../general/ConvertSVG';
+import ConvertSVG from '../general/_ConvertSVG';
 import { CURRENT_GAMES_CSS } from './config';
-import Text from '../general/Text';
+import Text from '../general/_Text';
 
 // Types
-import { IConvertedGameObject } from '../../types/chess';
+import { IConvertedGameObject } from '../../types/_chess';
 
 interface ICurrentGamesParameters {
   games: IConvertedGameObject[];

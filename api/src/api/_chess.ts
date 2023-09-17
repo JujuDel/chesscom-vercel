@@ -1,15 +1,15 @@
 // Packages
-const WebApiRequest = require('../request/webapi-request.js');
-const HttpManager = require('../request/http-manager.js');
+const WebApiRequest = require('../request/_webapi-request.js');
+const HttpManager = require('../request/_http-manager.js');
 
 // Types
 import {
   ICurrentDailyGame,
   ICurrentDailyGames,
   ICurrentDailyGamesResponse,
-} from '../types/chess';
-import { Environment } from '../helpers/environment';
-import { MOCKED_CHESS_PLAYER_CURRENT_DAILY_CHESS_RESPONSE } from '../data/chess';
+} from '../types/_chess';
+import { Environment } from '../helpers/_environment';
+import { MOCKED_CHESS_PLAYER_CURRENT_DAILY_CHESS_RESPONSE } from '../data/_chess';
 
 /**
  * Default value for current daily games with no available games.
