@@ -28,10 +28,14 @@ export default async function (
   req: VercelRequest,
   res: VercelResponse,
 ) {
-  const pieceImages: object = await getPieces();
+  const username = req.query.username;
+  if (!username) {
+    throw new Error('Empty username');
+  }
+  const str_username = String(username);
 
   // Using an awesome library called chess-web-api to get our data ;)
-  const lastGames = (await api.chess.getLastArchivedGames()).games.reverse();
+  const lastGames = (await api.chess.getLastArchivedGames(str_username)).games.reverse();
 
   // Limiting the width of the games.
   lastGames.length = Math.min(
@@ -41,7 +45,7 @@ export default async function (
 
   // There's a lot of data we don't need! Converting the FEN to an array
   const convertedCurrentGames: IConvertedFinishedGameObject[] = await Promise.all([
-    ...lastGames.map(convertFinishedGameObject),
+    ...lastGames.map((game) => convertFinishedGameObject(game, str_username)),
   ]);
 
   // Adding empty spots if there aren't 3!
@@ -51,6 +55,8 @@ export default async function (
 
   // Hey! I'm returning an image!
   convertToImageResponse(res);
+
+  const pieceImages: object = await getPieces();
 
   // Generating the component and rendering it
   const text: string = renderToString(

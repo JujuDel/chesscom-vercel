@@ -23,15 +23,15 @@ import {
 /**
  * 
  * @param {number} timestamp number of seconds since the Unix Epoch
- * @param {number} offset number of offset hours for the timezone, eg +2 for UTC +02:00
- * @returns {string} Readable timestamp in the form yyyy-mm-dd hh:mm:ss
+ * @param {number} offset number of offset hours for the timezone, eg +2 for UTC+2
+ * @returns {string} Readable timestamp in the form yy-mm-dd hh:mm:ss
  */
 function timestampToReadableDate(timestamp: number, offset: number): string {
   const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
   const utc = date.getTime() + date.getTimezoneOffset() * 60000; // Adjust for the local timezone offset
   const localDate = new Date(utc + (3600000 * offset)); // Apply the provided offset
 
-  const year = localDate.getFullYear();
+  const year = String(localDate.getFullYear()).slice(-2); // Get the last two digits of the year
   const month = String(localDate.getMonth() + 1).padStart(2, '0');
   const day = String(localDate.getDate()).padStart(2, '0');
   const hours = String(localDate.getHours()).padStart(2, '0');
@@ -45,19 +45,21 @@ function timestampToReadableDate(timestamp: number, offset: number): string {
  * Converts recieved game objects to simplified objects.
  *
  * @param {IDailyGame} game Recieved game object.
+ * @param {IFinishedGame} username The username of the current player.
  * @returns {IConvertedDailyGameObject} Converted game object.
  */
-export const convertDailyGameObject = (game: IDailyGame): IConvertedDailyGameObject => {
-  const isWhite: boolean = game.white.includes(Environment.getChessUsername());
+export const convertDailyGameObject = (game: IDailyGame, username: string): IConvertedDailyGameObject => {
   const white: string = (game.white.split('/').reverse())[0];
   const black: string = (game.black.split('/').reverse())[0];
-
+  const isWhite: boolean = white.toLowerCase() === username.toLocaleLowerCase();
+  
   return {
     black,
     end_time: null,
     isWhite,
     noGame: false,
     position: convertFenToArray(isWhite, game.fen),
+    time_class: 'Daily',
     white,
   };
 };
@@ -66,10 +68,12 @@ export const convertDailyGameObject = (game: IDailyGame): IConvertedDailyGameObj
  * Converts recieved game objects to simplified objects.
  *
  * @param {IFinishedGame} game Recieved game object.
+ * @param {IFinishedGame} username The username of the current player.
  * @returns {IConvertedFinishedGameObject} Converted game object.
  */
-export const convertFinishedGameObject = (game: IFinishedGame): IConvertedFinishedGameObject => {
-  const isWhite: boolean = game.white.username === Environment.getChessUsername();
+export const convertFinishedGameObject = (game: IFinishedGame, username: string): IConvertedFinishedGameObject => {
+  const isWhite: boolean = game.white.username.toLowerCase() === username.toLowerCase();
+  const time_class: string = game.time_class.charAt(0).toUpperCase() + game.time_class.slice(1);
 
   if (WIN_RESULTS.includes(game.black.result)) {
     game.black.result = "WIN";
@@ -88,6 +92,7 @@ export const convertFinishedGameObject = (game: IFinishedGame): IConvertedFinish
     isWhite,
     noGame: false,
     position: convertFenToArray(isWhite, game.fen),
+    time_class,
     white: game.white,
   };
 };
@@ -103,6 +108,7 @@ export const createEmptyGameObject = (): IConvertedDailyGameObject | IConvertedF
   isWhite: true,
   noGame: true,
   position: convertFenToArray(true, EMPTY_CHESS_BOARD_FEN),
+  time_class: null,
   white: null,
 });
 

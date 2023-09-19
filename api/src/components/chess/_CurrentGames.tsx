@@ -60,9 +60,7 @@ export const CurrentGames: React.FC<ICurrentGamesParameters> = ({
             </div>
 
             {!game.noGame && 
-              <Text
-                className="username"
-                color="grey-lighter">
+              <Text className="username" color="grey-lighter">
                 vs. { game.isWhite ? game.black : game.white }
               </Text>
             }
