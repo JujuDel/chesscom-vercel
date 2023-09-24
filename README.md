@@ -1,53 +1,27 @@
-<!-- Repo has been edited to be static, see comments for dynamic calls. -->
-hello! here's a little about me:
-
-<h1>
-  i really like music :headphones:
-</h1>
-
-<!-- Nothing weird to see here -->
-<p align="center">
-  <a href="https://readme.andyruwruw.com/api/now-playing?open">
-    <!-- Music bars move to the beat and are colored based on the track's happiness, danceability and energy! -->
-    <img src="https://raw.githubusercontent.com/andyruwruw/andyruwruw/master/example/now-playing.svg">
-    <!-- This is how you'd make the call dynamically <img src="https://readme.andyruwruw.com/api/now-playing"> -->
-  </a>
+ <p align="center">
+  <!-- natemoo-re came up with the idea of HOW to show React components as an img on a README.md and the now playing component! -->
+  <!-- andyruwruw built a wrapper around the Chess.com Public API and displayed it on a READMEmd the same way natemoo-re is doing! -->
+  <i>Inspired by <a href="https://github.com/natemoo-re">natemoo-re</a> and <a href="https://github.com/andyruwruw">andyruwruw</a></i>
 </p>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/andyruwruw/andyruwruw/master/example/top-played.svg">
-  <!-- This is how you'd make the call dynamically <img src="https://readme.andyruwruw.com/api/top-played"> -->
-</p>
- 
-<p align="center">
-  <!-- He came up with the idea of HOW to show React components as an img on a README.md and the now playing component! -->
-  <i>inspired by <a href="https://github.com/natemoo-re">natemoo-re</a></i>
-</p>
+> If you are in dark mode, you might not see the figures' title
 
-<p></p>
+# Chess.com's currently played daily games
 
-<h1>
-  i was a frontend intern at chess.com ♟️
-</h1>
+> You can see here **the daily game I'm currently playing**
+>
+> The games are visualized from https://chesscom-vercel-jujudel.vercel.app/chess-current-games/?username=LuckyJu
 
-<p align="center">
-  <a href="https://www.chess.com/member/andyruwruw">
-    <img src="https://raw.githubusercontent.com/andyruwruw/andyruwruw/master/example/chess-games.svg">
-    <!-- This is how you'd make the call dynamically <img src="https://readme.andyruwruw.com/api/chess-games"> -->
-  </a>
-</p>
+<a href="https://www.chess.com/member/luckyju">
+  <img src="https://chesscom-vercel-jujudel.vercel.app/chess-current-games/?username=LuckyJu" align="center">
+</a>
 
-<p align="center">
-  <i>luckily being good at chess wasn't a pre-req to the job</i>
-</p>
+# Chess.com's last finished games
 
-<p></p>
+> You can see here **the last games I've finished**
+>
+> The games are visualized from https://chesscom-vercel-jujudel.vercel.app/chess-last-games/?username=LuckyJu
 
-<h1>
-  i'm a vue.js fanboy, but i do some other stuff too :hammer:
-</h1>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/andyruwruw/andyruwruw/master/example/skills.svg">
-  <!-- This is how you'd make the call dynamically <img src="https://readme.andyruwruw.com/api/skills"> -->
-</p>
+<a href="https://www.chess.com/member/luckyju">
+  <img src="https://chesscom-vercel-jujudel.vercel.app/chess-last-games/?username=LuckyJu" align="center">
+</a>
