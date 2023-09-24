@@ -16,6 +16,13 @@
   <img src="https://chesscom-vercel-jujudel.vercel.app/chess-current-games/?username=LuckyJu" align="center">
 </a>
 
+In your README.md, simply add:
+```markdown
+<a href="https://www.chess.com/member/luckyju">
+  <img src="https://chesscom-vercel-jujudel.vercel.app/chess-current-games/?username=LuckyJu" align="center">
+</a>
+```
+
 # Chess.com's last finished games
 
 > You can see here **the last games I've finished**
@@ -25,3 +32,10 @@
 <a href="https://www.chess.com/member/luckyju">
   <img src="https://chesscom-vercel-jujudel.vercel.app/chess-last-games/?username=LuckyJu" align="center">
 </a>
+
+In your README.md, simply add:
+```markdown
+<a href="https://www.chess.com/member/luckyju">
+  <img src="https://chesscom-vercel-jujudel.vercel.app/chess-last-games/?username=LuckyJu" align="center">
+</a>
+```
